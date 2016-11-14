@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.kidd.api.domain.User;
 import com.kidd.api.service.UserService;
-import com.kidd.server.dao.UserDao;
+import com.kidd.server.dao.UserMapper;
 
 /**
  * 远程调用的服务项目业务service实现类
@@ -15,14 +15,20 @@ import com.kidd.server.dao.UserDao;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
-//	@Autowired
-//	private UserDao userDao;
+	@Autowired
+	private UserMapper userMapper;
 	
 	
 	@Override
 	public User getUserById(int id) {
 		return new User(1, "张三", 1);
 //		return userDao.getUserById(id);
+	}
+
+
+	@Override
+	public Integer save(User user) {
+		return userMapper.insert(user);
 	}
 
 }
